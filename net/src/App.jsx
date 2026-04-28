@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function App() {
   const [age, setAge] = useState(10);
+  const [height, setHeight] = useState(138);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post("/api/predict", { age });
+      const res = await axios.post("/api/predict", { age, height });
       setResult(res.data);
     } catch {
       setError("Could not connect to backend. Make sure the Python server is running.");
@@ -35,6 +36,17 @@ export default function App() {
         style={{ width: "100%", margin: "12px 0" }}
       />
 
+      <label>Height: {height} cm</label>
+      <br />
+      <input
+        type="range"
+        min="50"
+        max="220"
+        value={height}
+        onChange={(e) => setHeight(Number(e.target.value))}
+        style={{ width: "100%", margin: "12px 0" }}
+      />
+
       <button onClick={predict} disabled={loading} style={{ padding: "8px 20px", cursor: "pointer" }}>
         {loading ? "Predicting..." : "Predict"}
       </button>
@@ -43,7 +55,6 @@ export default function App() {
 
       {result && (
         <div style={{ marginTop: "20px" }}>
-          <h2>Height: {result.height} cm</h2>
           <h2>Weight: {result.weight} kg</h2>
         </div>
       )}
