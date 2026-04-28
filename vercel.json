@@ -1,6 +1,8 @@
 {
+  "buildCommand": "cd net && npm install && npm run build",
+  "outputDirectory": "net/dist",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/net/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
