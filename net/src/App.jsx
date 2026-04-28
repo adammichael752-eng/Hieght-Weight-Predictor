@@ -29,7 +29,7 @@ export default function App() {
       <input
         type="range"
         min="5"
-        max="18"
+        max="100"
         value={age}
         onChange={(e) => setAge(Number(e.target.value))}
         style={{ width: "100%", margin: "12px 0" }}
